@@ -1,0 +1,334 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Govt Form Validation</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { 
+    font-family: "Segoe UI", Roboto, sans-serif; 
+    background: url("https://images.unsplash.com/photo-1581092334513-6b1f89c71f4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80") 
+                no-repeat center center fixed;
+    background-size: cover;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 40px 20px;
+  }
+  .container {
+    width: 100%; max-width: 760px;
+    background: #fff; padding: 36px;
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(0,0,0,.25);
+    overflow-y: auto;
+    max-height: 95vh;
+  }
+  .gov-header { text-align: center; margin-bottom: 28px; }
+  .gov-header img { height: 80px; margin-bottom: 14px; }
+  .gov-header h1 { font-size: 26px; font-weight: 700; color: #1e293b; }
+  .gov-header p { color: #475569; margin-top: 6px; }
+  form { display: grid; gap: 18px; }
+  label { font-weight: 600; margin-bottom: 5px; display: block; }
+  input, select {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid #cbd5e1; border-radius: 12px;
+    font-size: 15px; background: #f8fafc;
+  }
+  button {
+    background: #0f766e; color: #fff;
+    border: none; padding: 14px 22px;
+    font-size: 16px; border-radius: 12px;
+    cursor: pointer; font-weight: 600;
+  }
+  button:hover { background: #115e59; }
+  .error { color: red; font-size: 13px; margin-top: 4px; }
+  .hint { font-size: 12px; color: #555; }
+  .toast {
+    position: fixed; right: 20px; bottom: 20px;
+    background: #16a34a; color: #fff;
+    padding: 12px 16px; border-radius: 10px;
+    display: none;
+  }
+     .left-panel {
+      width: 45%;
+      background: linear-gradient(135deg, #e7e8e8, #eaeeec);
+      color: #000000;
+      padding: 50px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .left-panel img {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .left-panel h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .left-panel p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .left-panel button {
+      padding: 12px 30px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #e53d3d;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .left-panel button:hover {
+      background: #cb0000;
+      color: #000000;
+    }
+
+    /* Right Panel */
+    .right-panel {
+      width: 55%;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-panel h2 {
+      color: #858b88;
+      margin-bottom: 20px;
+    }
+
+    .right-panel form {
+      display: flex;
+      flex-direction: column;
+    }
+</style>
+</head>
+<body>
+
+  <div class="left-panel">
+    <img src="election.png" alt="Logo">
+    <h2>Welcome Back!</h2>
+    <p>To keep connected with us please login with your personal info.</p>
+    <button>Sign In</button>
+  </div>
+  <div class=""right-panel">
+  <div class="container">
+    <div class="gov-header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ashoka_Chakra.svg/1200px-Ashoka_Chakra.svg.png" alt="Gov Logo">
+      <h1>Government of India – Citizen Form</h1>
+      <p>Secure Form Validation Portal</p>
+    </div>
+
+    <form id="Form" novalidate>
+      <!-- Personal Info -->
+      <div>
+        <label>Full Name</label>
+        <input id="name" type="text" placeholder="Enter your full name" required>
+        <div class="error" data-for="name"></div>
+      </div>
+      <div>
+        <label>Email ID</label>
+        <input id="email" type="email" placeholder="name@example.com"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$" required>
+        <div class="error" data-for="email"></div>
+      </div>
+      <div>
+        <label>Phone (+91)</label>
+        <input id="phonecc" type="tel" placeholder="+91 9876543210"
+          pattern="^\+91[ -]?[7-9]\d{9}$" required>
+        <div class="error" data-for="phonecc"></div>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label>Street</label>
+        <input id="street" type="text" placeholder="Street Name" required>
+        <div class="error" data-for="street"></div>
+      </div>
+      <div>
+        <label>Building No.</label>
+        <input id="building" type="text" placeholder="Door / Flat No." required>
+        <div class="error" data-for="building"></div>
+      </div>
+      <div>
+        <label>Post</label>
+        <input id="post" type="text" placeholder="Post Office" required>
+        <div class="error" data-for="post"></div>
+      </div>
+      <div>
+        <label>Taluk</label>
+        <input id="taluk" type="text" placeholder="Taluk Name" required>
+        <div class="error" data-for="taluk"></div>
+      </div>
+      <div>
+        <label>District</label>
+        <input id="district" type="text" placeholder="District Name" required>
+        <div class="error" data-for="district"></div>
+      </div>
+      <div>
+        <label>State</label>
+        <select id="state" required>
+          <option value="">-- Select State / UT --</option>
+          <option>Tamil Nadu</option>
+          <option>Kerala</option>
+          <option>Karnataka</option>
+          <option>Andhra Pradesh</option>
+          <option>Telangana</option>
+          <option>Maharashtra</option>
+          <option>Delhi</option>
+        </select>
+        <div class="error" data-for="state"></div>
+      </div>
+      <div>
+        <label>Pincode</label>
+        <input id="pincode" type="text" placeholder="600001"
+          pattern="^6\d{5}$" required>
+        <div class="error" data-for="pincode"></div>
+      </div>
+
+      <!-- IDs -->
+      <div>
+        <label>Voter ID</label>
+        <input id="voterid" type="text" placeholder="RGJ2225522"
+          pattern="^[A-Z]{3}\d{7}$" required>
+        <div class="error" data-for="voterid"></div>
+      </div>
+      <div>
+        <label>Date of Birth</label>
+        <input id="dob" type="text" placeholder="dd-mm-yyyy or yyyy-mm-dd" required>
+        <div class="error" data-for="dob"></div>
+      </div>
+      <div>
+        <label>Aadhaar</label>
+        <input id="aadhaar" type="text" placeholder="123456789123"
+          pattern="^\d{12}$" required>
+        <div class="error" data-for="aadhaar"></div>
+      </div>
+      <div>
+        <label>PAN</label>
+        <input id="pan" type="text" placeholder="ABCDE1234D"
+          pattern="^[A-Z]{5}[0-9]{4}[A-Z]$" required>
+        <div class="error" data-for="pan"></div>
+      </div>
+
+      <!-- Security -->
+      <div>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Abc@1234" 
+          required>
+        <div class="hint">Min 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 special char.</div>
+        <div class="error" data-for="password"></div>
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input id="confirmPassword" type="password" placeholder="Re-enter password" required>
+        <div class="error" data-for="confirmPassword"></div>
+      </div>
+
+      <!-- Gender -->
+      <div>
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+        <div class="error" data-for="gender"></div>
+      </div>
+
+      <!-- Terms -->
+      <div>
+        <input type="checkbox" id="terms" required> I agree to the Terms & Conditions
+        <div class="error" data-for="terms"></div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  </div>
+  <div id="toast" class="toast">✅ All validations passed!</div>
+
+<script>
+  function setError(input, msg) {
+    const err = document.querySelector(`.error[data-for="${input.id||input.name}"]`);
+    if(msg){ err.textContent = msg; }
+    else { err.textContent = ""; }
+  }
+
+  function validateDOB(val){
+    const ddmmyyyy=/^([0-3]\d)-(0[1-9]|1[0-2])-(\d{4})$/;
+    const yyyymmdd=/^(\d{4})-(0[1-9]|1[0-2])-([0-3]\d)$/;
+    let y,m,d;
+    if(ddmmyyyy.test(val)){[,d,m,y]=val.match(ddmmyyyy);}
+    else if(yyyymmdd.test(val)){[,y,m,d]=val.match(yyyymmdd);}
+    else return {ok:false,msg:"Use dd-mm-yyyy or yyyy-mm-dd"};
+    d=+d;m=+m;y=+y;
+    const dt=new Date(y,m-1,d);
+    if(dt.getFullYear()!=y||dt.getMonth()!=m-1||dt.getDate()!=d) 
+      return {ok:false,msg:"Invalid date"};
+    if(y<1900||dt>new Date()) return {ok:false,msg:"Enter valid past date"};
+    return {ok:true};
+  }
+
+  const form=document.getElementById("Form");
+  const toast=document.getElementById("toast");
+
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    let ok=true;
+
+    const password=document.getElementById("password");
+    const confirmPassword=document.getElementById("confirmPassword");
+    const gender=form.querySelector('input[name="gender"]:checked');
+    const terms=document.getElementById("terms");
+
+    // Password strength
+    const passRegex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    if(!passRegex.test(password.value)){
+      setError(password,"Password too weak"); ok=false;
+    } else setError(password,"");
+
+    // Confirm password
+    if(confirmPassword.value!==password.value){
+      setError(confirmPassword,"Passwords do not match"); ok=false;
+    } else setError(confirmPassword,"");
+
+    // DOB
+    const dob=document.getElementById("dob");
+    const v=validateDOB(dob.value.trim());
+    if(!v.ok){ setError(dob,v.msg); ok=false; }
+    else setError(dob,"");
+
+    // Gender
+    if(!gender){
+      setError({id:"gender"},"Please select a gender"); ok=false;
+    } else setError({id:"gender"},"");
+
+    // Terms
+    if(!terms.checked){
+      setError(terms,"You must accept Terms"); ok=false;
+    } else setError(terms,"");
+
+    // Other HTML5 pattern validations
+    [...form.elements].forEach(el=>{
+      if(el.tagName!=="INPUT" && el.tagName!=="SELECT") return;
+      if(el.type!=="radio" && el.type!=="checkbox" && !el.checkValidity()){
+        el.reportValidity(); ok=false;
+      }
+    });
+
+    if(!ok) return;
+
+    toast.style.display="block";
+    setTimeout(()=>toast.style.display="none",2000);
+    form.reset();
+  });
+</script>
+</body>
+</html>
